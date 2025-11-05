@@ -1,0 +1,30 @@
+version: 2
+sources:
+- name: tb_101
+  description: 'Point of Sale source data'
+  database: TB_101
+  schema: RAW
+  tables:
+  - name: COUNTRY
+    description: 'Country reference data2'
+    columns:
+    - name: COUNTRY_ID
+      description: 'Primary key for countries'
+      data_tests:
+        - not_null
+    - name: COUNTRY
+      description: 'Country name'
+      data_tests:
+        - not_null
+    - name: ISO_CURRENCY
+      description: 'ISO currency code'
+    - name: ISO_COUNTRY
+      description: 'ISO country code'
+      data_tests:
+        - not_null
+    - name: CITY_ID
+      description: 'City identifier'
+    - name: CITY
+      description: 'City name'
+    - name: CITY_POPULATION
+      description: 'City population count'

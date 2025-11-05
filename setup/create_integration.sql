@@ -13,15 +13,16 @@ CREATE OR REPLACE SECRET snowflake_learning_db.public.github_pat
   ;
 
 
--- Didn't work so created the repository manually
--- CREATE OR REPLACE GIT REPOSITORY dbt_snowflake_test
---   ORIGIN = 'https://github.com/arturoramoss/dbt-snowflake-test.git'
---   API_INTEGRATION = ( github_integration )
---   GIT_CREDENTIALS = ( snowflake_learning_db.public.github_pat )
--- ;
+CREATE OR REPLACE GIT REPOSITORY snowflake_learning_db.public.dbt_snowflake_test
+  ORIGIN = 'https://github.com/arturoramoss/dbt-snowflake-test.git'
+  API_INTEGRATION = github_integration
+  GIT_CREDENTIALS = github_pat
+;
+-- This doesn't work in the workspace so it's required to create again manually from the workspace
 
 
--- Create NETWORK RULE for external access integration
+
+-- Create NETWORK RULE for external access integration ( not allowed in trial snowflake)
 
 CREATE OR REPLACE NETWORK RULE dbt_network_rule
   MODE = EGRESS

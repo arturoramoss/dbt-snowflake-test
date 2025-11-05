@@ -6,14 +6,14 @@ dbt_snowflake_project:
       account: 'not needed'
       user: 'not needed'
       role: ACCOUNTADMIN
-      database: SNOWFLAKE_LEARNING_DB
+      database: DBT_TEST_DEV
       schema: dev 
       warehouse: COMPUTE_WH
-    prod:
+    stage:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
       role: ACCOUNTADMIN
-      database: SNOWFLAKE_LEARNING_DB
+      database: DBT_TEST_STAGE
       schema: prod
       warehouse: COMPUTE_WH

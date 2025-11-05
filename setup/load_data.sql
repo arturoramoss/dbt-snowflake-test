@@ -189,3 +189,14 @@ FROM @tb_101.public.s3load/raw_customer/customer_loyalty/;
 
 -- setup completion note
 SELECT 'tb_101 setup is now complete' AS note;
+
+--- NOTE: if running just from snowflake workspaces, for some reason is expecting the schemas for exist, instead of creating them as usual behaviour of dbt-core
+
+create or replace database dbt_test_dev;
+create or replace schema dbt_test_dev.dev;
+
+create or replace database dbt_test_stage;
+create or replace schema dbt_test_stage.prod;
+
+create or replace database dbt_test_prod;
+create or replace schema dbt_test_prod.prod;
