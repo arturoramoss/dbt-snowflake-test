@@ -47,13 +47,13 @@ jobs:
         run: snow connection test -x
 
       - name: Deploy the dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
-        run: snow dbt deploy DEMO_DBT_PROJECT --source ./tasty_bytes_dbt_demo --force -x
+        run: snow dbt deploy dbt_snowflake_test --source ./dbt_snowflake_project --force -x
 
       - name: List all of the snowflake dbt project objects on ${{ vars.SNOWFLAKE_ACCOUNT }}
         run: snow dbt list -x
 
       - name: Execute run on dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
-        run: snow dbt execute -x DEMO_DBT_PROJECT run --target prod --select raw_pos_order_detail
+        run: snow dbt execute -x dbt_snowflake_test run --target dev
 
       - name: Execute data quality test on dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
-        run: snow dbt execute -x DEMO_DBT_PROJECT test --target prod --select raw_pos_order_detail
+        run: snow dbt execute -x dbt_snowflake_test test --target dev
