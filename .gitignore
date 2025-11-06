@@ -1,3 +1,1 @@
-dbt_snowflake_project/target/
-dbt_snowflake_project/dbt_packages/
-dbt_snowflake_project/logs/
+logs/
