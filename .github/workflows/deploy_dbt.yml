@@ -2,9 +2,9 @@ name: Deploy dbt
 
 # Controls when the action will run. 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -54,8 +54,11 @@ jobs:
       - name: List all of the snowflake dbt project objects on ${{ vars.SNOWFLAKE_ACCOUNT }}
         run: snow dbt list -x
 
-      - name: Execute run on dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
-        run: snow dbt execute -x dbt_snowflake_test run --target dev
+      - name: Clone prod database object into ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
+        run: snow dbt execute -x dbt_snowflake_test run-operation clone_prod_database --target stage
+        
+      - name: Execute build on dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
+        run: snow dbt execute -x dbt_snowflake_test build --target stage
 
-      - name: Execute data quality test on dbt project object in ${{ vars.SNOWFLAKE_ACCOUNT }} on ${{ vars.SNOWFLAKE_DATABASE }}.${{ vars.SNOWFLAKE_SCHEMA }}
-        run: snow dbt execute -x dbt_snowflake_test test --target dev
+      - name: Swap prod and stage databases
+        run: snow dbt execute -x dbt_snowflake_test run-operation swap_databases --target stage
