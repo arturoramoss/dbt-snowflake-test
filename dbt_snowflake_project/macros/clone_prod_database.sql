@@ -5,8 +5,8 @@
       dbt run-operation clone_database --args '{"source_database": "PROD_DB", "target_database": "PROD_DB_CLONE"}'
     #}
 
-    {% set src = target.database | upper %}
-    {% set tgt = src.replace("_STAGE", "_PROD") | upper %}
+    {% set tgt = target.database | upper %}
+    {% set src = tgt.replace("_STAGE", "_PROD") | upper %}
 
     {% set sql %}
         create or replace database {{ tgt }}
