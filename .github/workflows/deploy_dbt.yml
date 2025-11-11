@@ -38,7 +38,8 @@ jobs:
           use-oidc: true
 
       - name: Inspect OIDC token (debug)
-        run: snow auth oidc read-token | jq .
+        run: |
+          snow auth oidc read-token | jq .
         
       - name: Check Snowflake CLI Version
         run: snow --version
