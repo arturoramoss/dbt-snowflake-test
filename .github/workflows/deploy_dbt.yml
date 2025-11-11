@@ -36,9 +36,6 @@ jobs:
         uses: snowflakedb/snowflake-cli-action@v2.0
         with: # Ensures Snowflake CLI will search for OIDC users matching this subject
           use-oidc: true
-
-      - name: Inspect OIDC token (debug)
-        run: snow auth oidc read-token | jwt decode -
         
       - name: Check Snowflake CLI Version
         run: snow --version
