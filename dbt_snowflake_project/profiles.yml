@@ -5,7 +5,7 @@ dbt_snowflake_project:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
-      role: ACCOUNTADMIN
+      role: GITHUB_CICD_ROLE
       database: DBT_TEST_DEV
       schema: dev 
       warehouse: COMPUTE_WH
