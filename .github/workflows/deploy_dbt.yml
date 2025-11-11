@@ -2,10 +2,6 @@ name: Deploy dbt
 
 # Controls when the action will run. 
 on:
-  # push:
-  #   branches:
-  #     - main
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -22,9 +18,9 @@ jobs:
       SNOWFLAKE_CLI_FEATURES_ENABLE_DBT: true
       SNOWFLAKE_DATABASE: ${{ vars.SNOWFLAKE_DATABASE }}
       SNOWFLAKE_SCHEMA: ${{ vars.SNOWFLAKE_SCHEMA }}
-      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      # SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
       SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      # SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -38,8 +34,11 @@ jobs:
 
       - name: Install Snowflake CLI
         uses: snowflakedb/snowflake-cli-action@v2.0
-        # with: # Ensures Snowflake CLI will search for OIDC users matching this subject
-        #   use-oidc: true
+        with: # Ensures Snowflake CLI will search for OIDC users matching this subject
+          use-oidc: true
+
+      - name: Inspect OIDC token (debug)
+        run: snow auth oidc read-token | jq .
         
       - name: Check Snowflake CLI Version
         run: snow --version
