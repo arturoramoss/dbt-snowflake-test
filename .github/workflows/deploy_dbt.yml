@@ -38,7 +38,7 @@ jobs:
           use-oidc: true
 
       - name: Inspect OIDC token (debug)
-        run: snow auth oidc read-token --type auto
+        run: snow auth oidc read-token --format JSON
         
       - name: Check Snowflake CLI Version
         run: snow --version
